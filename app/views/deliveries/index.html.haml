@@ -1,0 +1,37 @@
+%h1 Deliveries
+
+= form_tag inbound_deliveries_path, :multipart => true do
+  = file_field_tag 'inbound_csv'
+  = submit_tag "Upload Inbound"
+
+= form_tag outbound_deliveries_path, :multipart => true do
+  = file_field_tag 'outbound_csv'
+  = submit_tag "Upload Outbound"
+
+
+%table
+  %tr
+    %th Product
+    %th Purchase order
+    %th Order quantity
+    %th Actual quantity
+    %th Shipped at
+    %th
+    %th
+    %th
+
+  - @deliveries.each do |delivery|
+    %tr
+      %td
+        = link_to delivery.product.item_code, product_path(delivery.product_id)
+      %td= delivery.purchase_order
+      %td= delivery.order_quantity
+      %td= delivery.actual_quantity
+      %td= delivery.shipped_at
+      %td= link_to 'Show', delivery
+      %td= link_to 'Edit', edit_delivery_path(delivery)
+      %td= link_to 'Destroy', delivery, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Delivery', new_delivery_path

@@ -1,0 +1,25 @@
+= form_for @delivery do |f|
+  -if @delivery.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@delivery.errors.count, "error")} prohibited this delivery from being saved:"
+      %ul
+        - @delivery.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :product_id
+    = f.number_field :product_id
+  .field
+    = f.label :purchase_order
+    = f.text_field :purchase_order
+  .field
+    = f.label :order_quantity
+    = f.number_field :order_quantity
+  .field
+    = f.label :actual_quantity
+    = f.number_field :actual_quantity
+  .field
+    = f.label :shipped_at
+    = f.date_select :shipped_at
+  .actions
+    = f.submit 'Save'

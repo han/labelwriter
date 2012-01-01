@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Product:
+  = @delivery.product_id
+%p
+  %b Purchase order:
+  = @delivery.purchase_order
+%p
+  %b Order quantity:
+  = @delivery.order_quantity
+%p
+  %b Actual quantity:
+  = @delivery.actual_quantity
+%p
+  %b Shipped at:
+  = @delivery.shipped_at
+
+= link_to 'Edit', edit_delivery_path(@delivery)
+\|
+= link_to 'Back', deliveries_path

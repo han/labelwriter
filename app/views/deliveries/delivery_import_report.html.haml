@@ -1,0 +1,7 @@
+%p
+  Import was successful.
+%p
+  = @changed.count
+  Records were changed
+  - if @changed.count > 0
+    = link_to "Generate labels for changed records", labels_deliveries_path(:format => 'pdf', :range => @changed.join(','))

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  item_code: MyString
+  fetim_code: MyString
+  fetim_name: MyString
+  size: MyString
+  per_vpe: 1
+  per_box: 1
+  barcode: MyString
+
+two:
+  item_code: MyString
+  fetim_code: MyString
+  fetim_name: MyString
+  size: MyString
+  per_vpe: 1
+  per_box: 1
+  barcode: MyString

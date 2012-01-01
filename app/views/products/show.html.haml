@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Item code:
+  = @product.item_code
+%p
+  %b Fetim code:
+  = @product.fetim_code
+%p
+  %b Fetim name:
+  = @product.fetim_name
+%p
+  %b Size:
+  = @product.size
+%p
+  %b Per vpe:
+  = @product.per_vpe
+%p
+  %b Per box:
+  = @product.per_box
+%p
+  %b Barcode:
+  = @product.barcode
+
+= link_to 'Edit', edit_product_path(@product)
+\|
+= link_to 'Back', products_path
