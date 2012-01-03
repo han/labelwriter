@@ -9,6 +9,9 @@ gem 'pg'
 gem 'prawn'
 gem 'prawn_rails'
 gem 'haml'
+gem 'barby', :git => "git@github.com:han/barby.git"
+#gem 'barby', :path => "/Users/han/dev/han/barby"
+gem 'chunky_png'
 
 # Gems used only for assets and not required
 # in production environments by default.

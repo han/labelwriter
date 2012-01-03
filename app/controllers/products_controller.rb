@@ -21,6 +21,14 @@ class ProductsController < ApplicationController
     end
   end
 
+  def barcode
+    @product = Product.find(params[:product_id])
+
+    respond_to do |format|
+      format.png { send_data @product.barcode, :disposition => 'inline', :type => 'image/png'}
+    end
+  end
+
   # GET /products/new
   # GET /products/new.json
   def new

@@ -1,3 +1,9 @@
+GIT
+  remote: git@github.com:han/barby.git
+  revision: 8c469f25f0e11e6d23e47eb0e8c682b3bb39c80f
+  specs:
+    barby (0.5.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -33,6 +39,7 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.0.rc1)
     builder (3.0.0)
+    chunky_png (1.2.5)
     coffee-rails (3.2.0)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0.beta)
@@ -124,6 +131,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  barby!
+  chunky_png
   coffee-rails (~> 3.2.0)
   haml
   haml-rails

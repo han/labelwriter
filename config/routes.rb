@@ -9,6 +9,7 @@ Labelwriter::Application.routes.draw do
   end
 
   resources :products do
+    get 'barcode' => 'products#barcode', :as => 'barcode'
     collection do
       post 'import' => 'products#import'
     end

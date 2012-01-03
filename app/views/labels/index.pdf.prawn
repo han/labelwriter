@@ -17,7 +17,7 @@ prawn_document(:page_layout => :landscape, :page_size => "A4") do |pdf|
       pdf.text delivery.purchase_order, :align => :right
       pdf.text delivery.shipped_at.to_s, :align => :right
     end
-    pdf.image "#{Rails.root.join('app/assets/images/barcode.jpg')}", :height => 200, :at => [10, 200]
+    delivery.product.barcode.annotate_pdf(pdf, :xdim => 3 , :unbleed => 0.3,  :height => 200, :print_code => true, :guard_bar_size => 15)
     pdf.start_new_page
   end
   pdf.text "#{@ids.count} labels"

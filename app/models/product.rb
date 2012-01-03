@@ -1,4 +1,7 @@
 require 'csv'
+require 'barby'
+require 'barby/barcode/ean_13'
+require 'barby/outputter/prawn_outputter'
 
 class Product < ActiveRecord::Base
   has_many :deliveries
@@ -17,8 +20,11 @@ class Product < ActiveRecord::Base
         else
           create params
         end
-        # Rails.logger.info row.inspect
       end
     end
+  end
+
+  def barcode
+    Barby::EAN13.new('8711253806104')
   end
 end
