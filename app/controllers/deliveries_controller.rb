@@ -1,4 +1,6 @@
 class DeliveriesController < ApplicationController
+
+  before_filter :authenticate_user!
   # GET /deliveries
   # GET /deliveries.json
   def index

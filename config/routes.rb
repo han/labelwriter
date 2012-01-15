@@ -1,5 +1,12 @@
 Labelwriter::Application.routes.draw do
 
+  devise_scope :user do
+    scope :users, :as => :user do
+      resource :registration, :only => [:edit, :update, :destroy], :path => 'users', :controller => 'devise/registrations'
+    end
+  end
+  devise_for :users, :skip => :registrations
+
   resources :deliveries do
     collection do
       get 'labels.:format' => 'labels#index', :as => 'labels'
