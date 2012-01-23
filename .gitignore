@@ -6,3 +6,5 @@ public/uploads/**/*
 .DS_Store
 *.orig
 .sass-cache
+*.bak
+public/stylesheets
