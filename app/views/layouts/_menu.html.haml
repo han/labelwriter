@@ -1,0 +1,8 @@
+%ul
+  %li= link_to 'Deliveries', deliveries_path, ({:class => 'selected'} if request.path == deliveries_path)
+  %li= link_to 'Products', products_path, ({:class => 'selected'} if request.path == products_path)
+  - if current_user.admin?
+    %li= link_to 'Users', users_path, ({:class => 'selected'} if request.path == users_path)
+
+
+

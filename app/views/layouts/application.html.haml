@@ -1,0 +1,24 @@
+!!!
+%html
+  %head
+    %title Labelwriter
+    = stylesheet_link_tag "application"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    .container
+      .header
+        = image_tag 'pls_header.jpg'
+      .span-24
+        = render 'layouts/layout'
+      .span-24 
+        - if flash[:error] || flash[:notice]
+          .flash
+            = flash[:error] || flash[:notice]
+      .span-6
+        - if user_signed_in?
+          = render 'layouts/menu'
+        - else
+          &nbsp;
+      .span-18.last
+        = yield
