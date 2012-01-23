@@ -8,7 +8,7 @@
 #
 #
 
-u = User.new :email => 'admin@plsinternation.nl', :password => 'password', :password_confirmation => 'password' do |u|
+u = User.new :email => 'admin@plsinternational.nl', :password => 'password', :password_confirmation => 'password' do |u|
   u.admin = true
 end
 u.save
