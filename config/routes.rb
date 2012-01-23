@@ -7,6 +7,8 @@ Labelwriter::Application.routes.draw do
   end
   devise_for :users, :skip => :registrations
 
+  resources :users, :except => [:show]
+
   resources :deliveries do
     collection do
       get 'labels.:format' => 'labels#index', :as => 'labels'

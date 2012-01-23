@@ -1,0 +1,29 @@
+%h1 Users
+
+%table.item_table
+  %tr
+    %th Email
+    %th Role
+    %th Last Logged In
+    %th Login count
+    %th Last IP
+    %th
+    %th
+
+  - @users.each do |user|
+    %tr
+      %td= user.email
+      %td= user.admin? ? "Admin" : "User"
+      %td
+        - if user.current_sign_in_at.present?
+          = distance_of_time_in_words_to_now user.current_sign_in_at
+          ago
+      %td= user.sign_in_count
+      %td= user.current_sign_in_ip
+      %td= link_to 'Edit', edit_user_path(user)
+      %td= link_to 'Delete', user, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New User', new_user_path
+
