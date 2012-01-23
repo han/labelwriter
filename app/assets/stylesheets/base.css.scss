@@ -1,0 +1,22 @@
+@import "compass";
+@import "blueprint";
+
+@include blueprint;
+
+body {
+  /*background: black;*/
+
+  /*@include linear-gradient(color-stops(white, black));*/
+  /*@include column(5);*/
+
+}
+
+table.item_table {
+  @include alternating-rows-and-columns(#fff, #e0ffff, #000, #c0e0ff);
+  @include table-scaffolding;
+  @include outer-table-borders(1px, lightgrey);
+  border-spacing: 0;
+  td, th {
+    margin: 0;
+  }
+}
