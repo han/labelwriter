@@ -1,11 +1,8 @@
 %h1 Products
 
-= form_tag import_products_path, :multipart => true do
-  = file_field_tag 'import_csv'
-  = submit_tag "Uploaden"
 
 
-%table
+%table.item_table
   %tr
     %th Item code
     %th Fetim code
@@ -34,3 +31,9 @@
 %br
 
 = link_to 'New Product', new_product_path
+
+%br
+
+= form_tag import_products_path, :multipart => true do
+  = file_field_tag 'import_csv'
+  = submit_tag "Uploaden"
