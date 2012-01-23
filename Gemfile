@@ -20,6 +20,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.0'
 
   gem 'uglifier', '>= 1.0.3'
+  gem 'compass', git: 'git://github.com/chriseppstein/compass', branch: 'master'
 end
 
 gem 'jquery-rails'
