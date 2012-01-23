@@ -24,6 +24,14 @@ class Product < ActiveRecord::Base
     end
   end
 
+  # 1.Identify key fields, update migration
+  # 2.Read both articles and fetim_article_numbers files. Key of fetim
+  # file, get additional data from articles file
+  # 3.Identify existing field, and update if needed. Otherwise save a
+  # new record
+  # Error handling: text existence of needed fields. Dismiss if not
+  # found. Do this for both files.
+
   def barcode
     Barby::EAN13.new('8711253806104')
   end
