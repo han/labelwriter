@@ -1,22 +1,12 @@
-= form_for @user do |f|
-  -if @user.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
-      %ul
-        - @user.errors.full_messages.each do |msg|
-          %li= msg
+= semantic_form_for @user do |f|
+  = f.inputs do
+    = f.input :email
+    = f.input :password
+    = f.input :password_confirmation
+    = f.input :admin, :label => ' Administrator'
+  = f.actions do
+    = f.action :submit, :as => :button
+    = f.action :cancel, :as => :link, :label => 'Cancel'
 
-  .field
-    = f.label :email
-    = f.text_field :email
-  .field
-    = f.label :password
-    = f.password_field :password
-  .field
-    = f.label "Confirm password"
-    = f.password_field :password_confirmation
-  .field
-    = f.label :admininstrator
-    = f.check_box :admin
-  .actions
-    = f.submit 'Save'
+
+

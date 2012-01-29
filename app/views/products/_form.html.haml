@@ -1,31 +1,13 @@
-= form_for @product do |f|
-  -if @product.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@product.errors.count, "error")} prohibited this product from being saved:"
-      %ul
-        - @product.errors.full_messages.each do |msg|
-          %li= msg
+= semantic_form_for @product do |f|
+  = f.inputs do
+    = f.input :item_code
+    = f.input :fetim_code
+    = f.input :fetim_name
+    = f.input :size
+    = f.input :per_vpe
+    = f.input :per_box
+    = f.input :barcode, :label => 'EAN number'
+  = f.actions do
+    = f.action :submit, :as => :button
+    = f.action :cancel, :as => :link, :label => 'Cancel'
 
-  .field
-    = f.label :item_code
-    = f.text_field :item_code
-  .field
-    = f.label :fetim_code
-    = f.text_field :fetim_code
-  .field
-    = f.label :fetim_name
-    = f.text_field :fetim_name
-  .field
-    = f.label :size
-    = f.text_field :size
-  .field
-    = f.label :per_vpe
-    = f.number_field :per_vpe
-  .field
-    = f.label :per_box
-    = f.number_field :per_box
-  .field
-    = f.label :barcode
-    = f.text_field :barcode
-  .actions
-    = f.submit 'Save'
