@@ -2,6 +2,8 @@ require 'csv'
 class Delivery < ActiveRecord::Base
   belongs_to :product
 
+  validates :product_id, :purchase_order, :order_quantity, :presence => true
+
   def self.import_inbound_csv(file)
     return false unless file.present?
     csv = CSV.parse(file.read, :col_sep => ';', :headers => true, :skip_blanks => true)

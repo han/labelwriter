@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :admin
 
   validates :password, :confirmation => true
+  validates :email, :uniqueness => true
+  validates :email, :presence => true
+  validates :email, :format => {:with => Devise.email_regexp}
 
   before_validation :random_password, :on => :create
 

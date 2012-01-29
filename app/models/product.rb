@@ -6,6 +6,8 @@ require 'barby/outputter/prawn_outputter'
 class Product < ActiveRecord::Base
   has_many :deliveries
 
+  validates :item_code, :fetim_code, :presence => true
+
   def self.import_csv(file)
     return false unless file.present?
     csv = CSV.parse(file.read, :col_sep => ';', :headers => true, :skip_blanks => true)
