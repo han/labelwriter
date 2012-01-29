@@ -1,0 +1,12 @@
+%h2
+  Edit Account
+
+= semantic_form_for @user, :url => user_registration_path do |f|
+  = f.inputs do
+    = f.input :email
+    = f.input :password, :label => 'New password'
+    = f.input :password_confirmation, :label => 'Confirm new password'
+    = f.input :current_password, :hint => 'Needed to confirm changes'
+  = f.actions do
+    = f.action :submit, :as => :button
+    = f.action :cancel, :as => :link, :label => 'Cancel'
