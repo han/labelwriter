@@ -1,14 +1,35 @@
 @import "compass";
+@import "compass/reset";
+@import "compass/css3/images";
 @import "blueprint";
 
 @include blueprint;
 
+
 body {
-  /*background: black;*/
+  background-color: #fff;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px; }
 
-  /*@include linear-gradient(color-stops(white, black));*/
-  /*@include column(5);*/
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px; }
 
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+
+
+a {
+  &:link,  &:visited {
+    color: #333;
+  }
 }
 
 table.item_table {
@@ -19,4 +40,84 @@ table.item_table {
   td, th {
     margin: 0;
   }
+}
+
+.input.error {
+  margin-top: 0;
+}
+
+legend.label label {
+  font-size: 13px;
+}
+
+input[type='number'] {
+  margin: 0.5em, 0;
+  padding: 5px;
+}
+
+
+.menu {
+  @extend .reset;
+  @extend .clearfix;
+  display: block;
+  position: relative;
+  padding-left:0px;
+  margin-top: 59px;
+
+  li {
+    @extend .reset;
+    display: block;
+    list-style: none;
+    *vertical-align: top;
+    margin-bottom: 2px;
+    *zoom: 1;
+
+    a {
+      color: #444;
+      display: block;
+      text-decoration: none;
+      background: #c0e0ff;
+      *zoom: 1;
+      &:link, &:visited {
+        padding: 8px 15px;
+      }
+
+      &:hover {
+        @include background-image(linear-gradient(top, #c0e0ff, #b0d0ff));
+        color: #000;
+        text-decoration: underline;
+      }
+
+      &.selected {
+        @include background-image(linear-gradient(top, #4289CE,#316CAF));
+        color: #fff;
+        &:hover {
+          text-decoration: none;
+          cursor: default;
+        }
+      }
+    }
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 0;
+    top: -50px;
+  }
+}
+
+#top_links {
+  float: right;
+}
+
+#user_message {
+  margin-right: 10px;
+}
+#user_links {
+}
+
+.upload_form {
+  margin-top: 30px;
 }
