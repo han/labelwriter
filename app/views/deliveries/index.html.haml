@@ -21,20 +21,19 @@
       %td= delivery.order_quantity
       %td= delivery.actual_quantity
       %td= delivery.shipped_at
-      %td= link_to 'Show', delivery
+      %td= link_to 'Label', labels_deliveries_path(:format => 'pdf', :range => delivery.id), :target => '_blank'
       %td= link_to 'Edit', edit_delivery_path(delivery)
-      %td= link_to 'Destroy', delivery, :confirm => 'Are you sure?', :method => :delete
+      %td= link_to 'Delete', delivery, :confirm => 'Are you sure?', :method => :delete
 
-%br
+= paginate @deliveries
 
 = link_to 'New Delivery', new_delivery_path
 
-%br
+.upload_form
+  = form_tag inbound_deliveries_path, :multipart => true do
+    = file_field_tag 'inbound_csv'
+    = submit_tag "Upload Inbound"
 
-= form_tag inbound_deliveries_path, :multipart => true do
-  = file_field_tag 'inbound_csv'
-  = submit_tag "Upload Inbound"
-
-= form_tag outbound_deliveries_path, :multipart => true do
-  = file_field_tag 'outbound_csv'
-  = submit_tag "Upload Outbound"
+  = form_tag outbound_deliveries_path, :multipart => true do
+    = file_field_tag 'outbound_csv'
+    = submit_tag "Upload Outbound"

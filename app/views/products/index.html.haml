@@ -13,27 +13,25 @@
     %th Barcode
     %th
     %th
-    %th
 
   - @products.each do |product|
     %tr
-      %td= product.item_code
+      %td= link_to product.item_code, product_path(product.id)
       %td= product.fetim_code
       %td= product.fetim_name
       %td= product.size
       %td= product.per_vpe
       %td= product.per_box
       %td= product.barcode
-      %td= link_to 'Show', product
       %td= link_to 'Edit', edit_product_path(product)
-      %td= link_to 'Destroy', product, :confirm => 'Are you sure?', :method => :delete
+      %td= link_to 'Delete', product, :confirm => 'Are you sure?', :method => :delete
 
-%br
+= paginate @products
 
 = link_to 'New Product', new_product_path
 
-%br
+.upload_form
 
-= form_tag import_products_path, :multipart => true do
-  = file_field_tag 'import_csv'
-  = submit_tag "Uploaden"
+  = form_tag import_products_path, :multipart => true do
+    = file_field_tag 'import_csv'
+    = submit_tag "Upload Products"

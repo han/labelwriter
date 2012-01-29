@@ -4,7 +4,7 @@ class DeliveriesController < ApplicationController
   # GET /deliveries
   # GET /deliveries.json
   def index
-    @deliveries = Delivery.order('id DESC').all
+    @deliveries = Delivery.order('id DESC').page(params[:page]).per(25)
 
     respond_to do |format|
       format.html # index.html.erb

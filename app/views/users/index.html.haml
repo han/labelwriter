@@ -23,6 +23,7 @@
       %td= link_to 'Edit', edit_user_path(user)
       %td= link_to 'Delete', user, :confirm => 'Are you sure?', :method => :delete
 
+= paginate @users
 %br
 
 = link_to 'New User', new_user_path

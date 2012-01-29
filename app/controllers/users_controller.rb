@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_filter :authorize_admin!
 
   def index
-    @users = User.order('id DESC').all
+    @users = User.order('email ASC').page(params[:page]).per(25)
   end
 
   def new
