@@ -7,10 +7,13 @@ Labelwriter::Application.routes.draw do
   end
   devise_for :users, :skip => :registrations
 
-  resources :users, :except => [:show]
+  resources :users, :except => [:show] do
+    get 'page/:page', :action => :index, :on => :collection
+  end
 
   resources :deliveries do
     collection do
+      get 'page/:page', :action => :index
       get 'labels.:format' => 'labels#index', :as => 'labels'
       post 'inbound' => 'deliveries#inbound'
       post 'outbound' => 'deliveries#outbound'
@@ -20,13 +23,14 @@ Labelwriter::Application.routes.draw do
   resources :products do
     get 'barcode' => 'products#barcode', :as => 'barcode'
     collection do
+      get 'page/:page', :action => :index
       post 'import' => 'products#import'
     end
   end
 
 
 
-  root :to => 'deliveries#index'
+  root :to => redirect('/deliveries')
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
