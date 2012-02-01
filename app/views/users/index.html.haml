@@ -11,7 +11,7 @@
     %th
 
   - @users.each do |user|
-    %tr
+    %tr{:class => cycle('even', 'odd')}
       %td= user.email
       %td= user.admin? ? "Admin" : "User"
       %td
@@ -23,7 +23,9 @@
       %td= link_to 'Edit', edit_user_path(user)
       %td= link_to 'Delete', user, :confirm => 'Are you sure?', :method => :delete
 
-= paginate @users
+.pagination
+  = paginate @users
+
 %br
 
 = link_to 'New User', new_user_path

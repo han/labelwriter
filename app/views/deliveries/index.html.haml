@@ -14,7 +14,7 @@
     %th
 
   - @deliveries.each do |delivery|
-    %tr
+    %tr{:class => cycle('even', 'odd')}
       %td
         = link_to delivery.product.item_code, product_path(delivery.product_id)
       %td= delivery.purchase_order
@@ -25,7 +25,8 @@
       %td= link_to 'Edit', edit_delivery_path(delivery)
       %td= link_to 'Delete', delivery, :confirm => 'Are you sure?', :method => :delete
 
-= paginate @deliveries
+.pagination
+  = paginate @deliveries
 
 = link_to 'New Delivery', new_delivery_path
 
