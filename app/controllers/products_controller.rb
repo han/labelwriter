@@ -92,7 +92,7 @@ class ProductsController < ApplicationController
   end
 
   def import
-    if Product.import_csv params[:import_csv]
+    if Product.import_csv(params[:products_csv], params[:fetimcodes_csv])
       redirect_to products_path, :notice => 'Import geslaagd'
     else
       redirect_to products_path, :error => 'Import mislukt'

@@ -4,34 +4,47 @@
 
 %table.item_table
   %tr
-    %th Item code
+    %th{:width => '160px'} Item code
     %th Fetim code
-    %th Fetim name
-    %th Size
-    %th Per vpe
-    %th Per box
+    %th Label
+    %th Item Group Code
+    %th Diameter
+    %th Num In Buy
+    %th Per Pack
+    %th Max Pallet 
     %th Barcode
     %th
     %th
 
   - @products.each do |product|
-    %tr
+    %tr{:class => cycle('even', 'odd')}
       %td= link_to product.item_code, product_path(product.id)
       %td= product.fetim_code
-      %td= product.fetim_name
-      %td= product.size
-      %td= product.per_vpe
-      %td= product.per_box
-      %td= product.barcode
+      %td= product.omlabel
+      %td= product.item_grp_code
+      %td= product.diameter
+      %td= product.num_in_buy
+      %td= product.per_pack_un
+      %td= product.max_pallet
+      %td= product.code_bars
       %td= link_to 'Edit', edit_product_path(product)
       %td= link_to 'Delete', product, :confirm => 'Are you sure?', :method => :delete
 
-= paginate @products
+.pagination
+  = paginate @products
 
 = link_to 'New Product', new_product_path
 
-.upload_form
-
-  = form_tag import_products_path, :multipart => true do
-    = file_field_tag 'import_csv'
-    = submit_tag "Upload Products"
+- if current_user.admin?
+  .upload_form
+    = form_tag import_products_path, :multipart => true do
+      %ul
+        %li
+          = label_tag do
+            Products CSV
+            = file_field_tag 'products_csv', :label => 'Products CSV'
+        %li
+          = label_tag do
+            FETIM codes CSV
+            = file_field_tag 'fetimcodes_csv', :label => 'Fetim CSV'
+      = submit_tag "Upload Products"

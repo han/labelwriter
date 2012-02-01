@@ -27,14 +27,16 @@ ActiveRecord::Schema.define(:version => 20120103074046) do
 
   create_table "products", :force => true do |t|
     t.string   "item_code"
+    t.string   "item_grp_code"
+    t.string   "code_bars"
+    t.integer  "num_in_buy"
+    t.integer  "per_pack_un"
+    t.integer  "diameter"
+    t.string   "omlabel"
+    t.integer  "max_pallet"
     t.string   "fetim_code"
-    t.string   "fetim_name"
-    t.string   "size"
-    t.integer  "per_vpe"
-    t.integer  "per_box"
-    t.string   "barcode"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "users", :force => true do |t|

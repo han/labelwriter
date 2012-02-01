@@ -2,11 +2,13 @@
   = f.inputs do
     = f.input :item_code
     = f.input :fetim_code
-    = f.input :fetim_name
-    = f.input :size
-    = f.input :per_vpe
-    = f.input :per_box
-    = f.input :barcode, :label => 'EAN number'
+    = f.input :omlabel
+    = f.input :item_grp_code
+    = f.input :diameter, :label => 'Diameter (mm)'
+    = f.input :num_in_buy
+    = f.input :per_pack_un
+    = f.input :max_pallet
+    = f.input :code_bars, :label => 'EAN number'
   = f.actions do
     = f.action :submit, :as => :button
     = f.action :cancel, :as => :link, :label => 'Cancel'

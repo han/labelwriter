@@ -9,20 +9,26 @@
   %b Fetim code:
   = @product.fetim_code
 %p
-  %b Fetim name:
-  = @product.fetim_name
+  %b Label:
+  = @product.omlabel
 %p
-  %b Size:
-  = @product.size
+  %b Brand
+  = @product.item_grp_code
 %p
-  %b Per vpe:
-  = @product.per_vpe
+  %b diameter (mm):
+  = @product.diameter
 %p
-  %b Per box:
-  = @product.per_box
+  %b Per buy unit:
+  = @product.num_in_buy
 %p
-  %b Barcode:
-  = @product.barcode
+  %b Per pack unit:
+  = @product.per_pack_un
+%p
+  %b Max per pallet:
+  = @product.max_pallet
+%p
+  %b EAN code
+  = @product.code_bars
 
 = link_to 'Edit', edit_product_path(@product)
 \|
