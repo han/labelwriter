@@ -4,7 +4,7 @@
     = f.input :email
     = f.input :password
     - if devise_mapping.rememberable?
-      = f.input :remember_me, :label => ' Remember me', :as => :boolean
+      = f.input :remember_me, :label => ' Remember me', :as => :boolean, :input_html => {:checked => true}
   = f.actions do
     = f.action :submit, :label => "Sign in"
 = render "links"
