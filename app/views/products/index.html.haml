@@ -4,15 +4,14 @@
 
 %table.item_table
   %tr
-    %th{:width => '160px'} Item code
-    %th Fetim code
-    %th Label
-    %th Item Group Code
-    %th Diameter
-    %th Num In Buy
-    %th Per Pack
-    %th Max Pallet 
-    %th Barcode
+    %th{:width => '210px'} Item code
+    %th Fetim
+    %th{:width => '150px'} Label
+    %th{:width => '100px'} Brand
+    %th{:width => '140px'} Size
+    %th p.Unit
+    %th p.Pack
+    %th p.Pallet 
     %th
     %th
 
@@ -20,9 +19,9 @@
     %tr{:class => cycle('even', 'odd')}
       %td= link_to product.item_code, product_path(product.id)
       %td= product.fetim_code
-      %td= product.omlabel
+      %td= (product.omlabel || '').truncate(18)
       %td= product.item_grp_code
-      %td= product.diameter
+      %td= (product.size || '').truncate(14)
       %td= product.num_in_buy
       %td= product.per_pack_un
       %td= product.max_pallet

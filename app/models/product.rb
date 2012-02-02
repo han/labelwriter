@@ -11,7 +11,7 @@ class Product < ActiveRecord::Base
   validates :item_code, :fetim_code, :presence => true
 
   BRANDS = Hash.new('').merge({
-    159 => 'Air Pro',
+    159 => 'AirPro',
     103 => 'IVC Air',
     144 => 'Sencys'
   })
@@ -22,7 +22,7 @@ class Product < ActiveRecord::Base
     'Barcode' => 'code_bars',
     'Aantal artikelen per inkoopeenheid' => 'num_in_buy',
     'Hoeveelheid per verpakkingseenheid' => 'per_pack_un',
-    'overall diameter [mm]' => 'diameter',
+    'overall diameter [mm]' => 'size',
     'Omschrijving label' => 'omlabel',
     'Maximaal aantal dozen p pallet' => 'max_pallet',
     'Catalogusnummer ZP' => 'fetim_code'
@@ -44,6 +44,11 @@ class Product < ActiveRecord::Base
         row.each {|k,v| params[COLUMNS[k]] = v if COLUMNS[k]}
         params['item_grp_code'] = BRANDS[params['item_grp_code']]
         params['fetim_code'] = fetim_codes[params['item_code']] if fetim_codes[params['item_code']]
+        details = (row['Artikelomschrijving'] || '').split(' - ')
+        if details.count >= 4
+          params[:omlabel] = details[1].gsub(/(air\s?pro)|(ivc\s?air)|(sencys)/i,'')
+          params[:size] ||= details[3]
+        end
         existing = Product.find_by_item_code params['item_code']
         if existing
           existing.update_attributes params
@@ -63,6 +68,12 @@ class Product < ActiveRecord::Base
   # found. Do this for both files.
 
   def barcode
-    Barby::EAN13.new(self.code_bars)
+    Barby::EAN13.new(self.code_bars) if self.code_bars.present?
   end
+
+  def delete!
+    self.status = 'deleted'
+    save
+  end
+
 end
