@@ -40,6 +40,9 @@ table.item_table {
   td, th {
     margin: 0;
   }
+  tr.inconsistent td, tr.inconsistent td:nth-child(1n) {
+    background-color: #f99;
+  }
 }
 
 .input.error {
@@ -121,11 +124,22 @@ input[type='number'] {
 
 .upload_form {
   margin-top: 30px;
+  ul {
+    list-style: none;
+    li {
+      margin-left:-20px;
+    }
+  }
 }
 
 .pagination {
   margin-left: auto;
   margin-right: auto;
   display: block;
-  width: 300px;
+  width: 350px;
+  text-align: center;
+}
+
+.footer {
+  min-height: 40px;
 }
