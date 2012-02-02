@@ -15,6 +15,9 @@
 %p
   %b Shipped at:
   = @delivery.shipped_at
+%p
+  %b Delivered at:
+  = @delivery.delivered_at
 
 = link_to 'Edit', edit_delivery_path(@delivery)
 \|
