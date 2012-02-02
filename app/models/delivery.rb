@@ -50,7 +50,7 @@ class Delivery < ActiveRecord::Base
     Delivery.transaction do
       csv.each do |row|
         next if row.header_row?
-        delivery_date = Date.strptime(row['Delivery Date'], "%d-%m-%y")
+        delivery_date = Date.strptime(row['Delivery Date'], "%d-%m-%Y")
         tour_number = row['Tour Number']
         po = row['Ordernr']
         order_qty = convert_to_i(row['Order. Qty'])
