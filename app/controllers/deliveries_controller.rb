@@ -1,6 +1,7 @@
 class DeliveriesController < ApplicationController
 
   before_filter :authenticate_user!
+  before_filter :authorize_pls!, :only => [:destroy, :inbound]
   # GET /deliveries
   # GET /deliveries.json
   def index

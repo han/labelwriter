@@ -27,9 +27,13 @@
   %b Max per pallet:
   = @product.max_pallet
 %p
-  %b EAN code
+  %b EAN code:
   = @product.code_bars
+%p
+  %b Status:
+  = @product.status
 
-= link_to 'Edit', edit_product_path(@product)
-\|
+-unless current_user.extern?
+  = link_to 'Edit', edit_product_path(@product)
+  \|
 = link_to 'Back', products_path

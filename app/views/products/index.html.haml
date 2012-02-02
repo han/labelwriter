@@ -26,25 +26,33 @@
       %td= product.num_in_buy
       %td= product.per_pack_un
       %td= product.max_pallet
-      %td= product.code_bars
-      %td= link_to 'Edit', edit_product_path(product)
-      %td= link_to 'Delete', product, :confirm => 'Are you sure?', :method => :delete
+      - unless current_user.extern?
+        %td= link_to 'Edit', edit_product_path(product)
+        %td
+          - unless product.status == 'deleted'
+            = link_to 'Del', product, :confirm => 'Are you sure?', :method => :delete
 
 .pagination
   = paginate @products
 
-= link_to 'New Product', new_product_path
+- unless current_user.extern?
+  = link_to 'New Product', new_product_path
 
-- if current_user.admin?
   .upload_form
+    %h3 Import Products
     = form_tag import_products_path, :multipart => true do
       %ul
         %li
           = label_tag do
-            Products CSV
+            .span-4
+              Products CSV
+            .span-6
             = file_field_tag 'products_csv', :label => 'Products CSV'
         %li
           = label_tag do
-            FETIM codes CSV
-            = file_field_tag 'fetimcodes_csv', :label => 'Fetim CSV'
-      = submit_tag "Upload Products"
+            .span-4
+              FETIM codes CSV
+            .span-6
+              = file_field_tag 'fetimcodes_csv', :label => 'Fetim CSV'
+      .span-10{:style => 'margin-left:276px'}
+        = submit_tag "Upload Products", :disable_with => 'Please wait...'

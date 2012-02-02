@@ -31,9 +31,10 @@
 = link_to 'New Delivery', new_delivery_path
 
 .upload_form
-  = form_tag inbound_deliveries_path, :multipart => true do
-    = file_field_tag 'inbound_csv'
-    = submit_tag "Upload Inbound"
+  - unless current_user.extern?
+    = form_tag inbound_deliveries_path, :multipart => true do
+      = file_field_tag 'inbound_csv'
+      = submit_tag "Upload Inbound"
 
   = form_tag outbound_deliveries_path, :multipart => true do
     = file_field_tag 'outbound_csv'

@@ -31,4 +31,9 @@ class ApplicationController < ActionController::Base
   def authorize_admin!
     user_signed_in? && current_user.admin?
   end
+
+  def authorize_pls!
+    user_signed_in? && !current_user.extern?
+  end
+
 end

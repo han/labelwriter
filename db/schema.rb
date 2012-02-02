@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120103074046) do
+ActiveRecord::Schema.define(:version => 20120202054437) do
 
   create_table "deliveries", :force => true do |t|
     t.integer  "product_id"
@@ -25,23 +25,34 @@ ActiveRecord::Schema.define(:version => 20120103074046) do
     t.datetime "updated_at",      :null => false
   end
 
+  create_table "delivery_audits", :force => true do |t|
+    t.text     "info"
+    t.string   "type"
+    t.integer  "user"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "products", :force => true do |t|
-    t.string   "item_code"
+    t.string   "item_code",                           :null => false
     t.string   "item_grp_code"
     t.string   "code_bars"
     t.integer  "num_in_buy"
     t.integer  "per_pack_un"
-    t.integer  "diameter"
+    t.string   "size"
     t.string   "omlabel"
     t.integer  "max_pallet"
     t.string   "fetim_code"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.string   "status",        :default => "active", :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
   end
 
+  add_index "products", ["item_code"], :name => "index_products_on_item_code", :unique => true
+
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "",    :null => false
-    t.string   "encrypted_password",     :default => "",    :null => false
+    t.string   "email",                  :default => "",       :null => false
+    t.string   "encrypted_password",     :default => "",       :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -50,9 +61,10 @@ ActiveRecord::Schema.define(:version => 20120103074046) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.boolean  "admin",                  :default => false
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.string   "role",                   :default => "extern", :null => false
+    t.string   "status",                 :default => "active", :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
