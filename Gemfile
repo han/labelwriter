@@ -15,6 +15,9 @@ gem 'devise', '~> 2.0.0'
 gem 'formtastic', '= 2.1.0.beta1'
 gem 'kaminari'
 
+gem 'thin'
+gem 'heroku'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
