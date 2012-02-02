@@ -11,7 +11,6 @@ gem 'prawn_rails'
 gem 'haml'
 gem 'barby', :git => "git@github.com:han/barby.git"
 #gem 'barby', :path => "/Users/han/dev/han/barby"
-#gem 'chunky_png'
 gem 'devise', '~> 2.0.0'
 gem 'formtastic', '= 2.1.0.beta1'
 gem 'kaminari'
