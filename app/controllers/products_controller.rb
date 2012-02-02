@@ -84,7 +84,7 @@ class ProductsController < ApplicationController
   # DELETE /products/1.json
   def destroy
     @product = Product.find(params[:id])
-    @product.destroy
+    @product.delete!
 
     respond_to do |format|
       format.html { redirect_to products_url }
