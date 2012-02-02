@@ -36,7 +36,8 @@
 .pagination
   = paginate @deliveries
 
-= link_to 'New Delivery', new_delivery_path
+- unless current_user.extern?
+  = link_to 'New Delivery', new_delivery_path
 
 .upload_form
   - unless current_user.extern?

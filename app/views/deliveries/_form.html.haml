@@ -1,11 +1,11 @@
 = semantic_form_for @delivery do |f|
   = f.inputs do
-    = f.input :product, :member_label => :item_code
-    = f.input :purchase_order
-    = f.input :order_quantity
+    = f.input :product, :member_label => :item_code, :input_html => {:disabled => current_user.extern? }
+    = f.input :purchase_order, :input_html => {:disabled => current_user.extern?}
+    = f.input :order_quantity, :input_html => {:disabled => current_user.extern?}
     = f.input :actual_quantity
-    = f.input :shipped_at,:as => :date, :order => [:day, :month, :year], :start_year => 2011
-    = f.input :delivered_at,:as => :date, :order => [:day, :month, :year], :start_year => 2011
+    = f.input :shipped_at,:label => ' Shipped', :as => :date, :order => [:day, :month, :year], :start_year => 2011, :input_html => {:disabled => current_user.extern?}
+    = f.input :delivered_at,:label => ' Delivered', :as => :date, :order => [:day, :month, :year], :start_year => 2011
   = f.actions do
     = f.action :submit, :as => :button
     = f.action :cancel, :as => :link, :label => 'Cancel'
