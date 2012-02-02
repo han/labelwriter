@@ -4,6 +4,7 @@ class LabelsController < ApplicationController
     respond_to do |format|
       format.pdf do
         @ids = (params[:range] || '').split(',').map(&:to_i)
+        @deliveries = Delivery.where(:id => @ids)
         render 'index'
       end
     end
