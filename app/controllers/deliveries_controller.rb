@@ -85,7 +85,7 @@ class DeliveriesController < ApplicationController
   end
 
   def inbound
-    @changed = Delivery.import_inbound_csv params[:inbound_csv]
+    @changed = Delivery.import_inbound_csv params[:inbound_csv], current_user
     if @changed
       # redirect_to deliveries_path, :notice => 'Import geslaagd'
       render 'delivery_import_report'
@@ -96,7 +96,7 @@ class DeliveriesController < ApplicationController
   end
 
   def outbound
-    @changed = Delivery.import_outbound_csv params[:outbound_csv]
+    @changed = Delivery.import_outbound_csv params[:outbound_csv], current_user
     if @changed
       render 'delivery_import_report'
     else
