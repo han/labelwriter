@@ -1,57 +1,59 @@
 %h1 Products
-
-
-
-%table.item_table
-  %tr
-    %th{:width => '210px'} Item code
-    %th Fetim
-    %th{:width => '150px'} Label
-    %th{:width => '100px'} Brand
-    %th{:width => '140px'} Size
-    %th /Unit
-    %th /Box
-    %th /Pallet
-    %th
-    %th
-
-  - @products.each do |product|
-    %tr{:class => cycle('even', 'odd')}
-      %td= link_to product.item_code, product_path(product.id)
-      %td= product.fetim_code
-      %td= (product.omlabel || '').truncate(18)
-      %td= product.item_grp_code
-      %td= (product.size || '').truncate(14)
-      %td= product.num_in_buy
-      %td= product.per_pack_un
-      %td= product.max_pallet
+.spacer20
+%table.table.table-striped.table-borderedx.table-condensed#item-table
+  %thead
+    %tr
+      %th{:width => '210px'} Item code
+      %th Fetim
+      %th{:width => '150px'} Label
+      %th{:width => '100px'} Brand
+      %th{:width => '140px'} Size
+      %th /Unit
+      %th /Box
+      %th /Pallet
       - unless current_user.extern?
-        %td= link_to 'Edit', edit_product_path(product)
-        %td
-          - unless product.status == 'deleted'
-            = link_to 'Del', product, :confirm => 'Are you sure?', :method => :delete
+        %th
+          %i.icon-edit
+        %th
+          %i.icon-trash
+  %tbody
+    - @products.each do |product|
+      %tr{:class => cycle('even', 'odd')}
+        %td= link_to product.item_code, product_path(product.id)
+        %td= product.fetim_code
+        %td= (product.omlabel || '').truncate(18)
+        %td= product.item_grp_code
+        %td= (product.size || '').truncate(14)
+        %td= product.num_in_buy
+        %td= product.per_pack_un
+        %td= product.max_pallet
+        - unless current_user.extern?
+          %td
+            =link_to 'Edit', edit_product_path(product)
+          %td
+            - unless product.status == 'deleted'
+              = link_to 'Del', product, :confirm => 'Are you sure?', :method => :delete
 
-.pagination
-  = paginate @products
+= paginate @products
 
 - unless current_user.extern?
-  = link_to 'New Product', new_product_path
+  %strong
+    = link_to 'New Product', new_product_path
+  %div{:style => 'min-height: 20px'}
 
-  .upload_form
-    %h3 Import Products
-    = form_tag import_products_path, :multipart => true do
-      %ul
-        %li
-          = label_tag do
-            .span-4
-              Products CSV
-            .span-6
-            = file_field_tag 'products_csv', :label => 'Products CSV'
-        %li
-          = label_tag do
-            .span-4
-              FETIM codes CSV
-            .span-6
-              = file_field_tag 'fetimcodes_csv', :label => 'Fetim CSV'
-      .span-10{:style => 'margin-left:276px'}
-        = submit_tag "Upload Products", :disable_with => 'Please wait...'
+  .row-fluid
+    .span6.offset2
+      .upload_form
+        .well
+          %h3 Import Products
+          .spacer20
+          = form_tag import_products_path, :multipart => true, :class => 'form-horizontal' do
+            .control-group
+              = label_tag 'Products CSV', nil, :class => 'control-label'
+              .controls
+                = file_field_tag 'products_csv', :label => 'Products CSV'
+            .control-group
+              = label_tag 'FETIM codes CSV', nil, :class => 'control-label'
+              .controls
+                = file_field_tag 'fetimcodes_csv', :label => 'Fetim CSV'
+            = submit_tag "Upload Products", :disable_with => 'Please wait...', :class => 'btn btn-danger'

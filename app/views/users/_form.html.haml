@@ -1,12 +1,14 @@
-= semantic_form_for @user do |f|
-  = f.inputs do
-    = f.input :email
-    = f.input :password
-    = f.input :password_confirmation
-    = f.input :role, :as => :select, :include_blank => false, :collection => ['extern', 'pls', 'admin']
-  = f.actions do
-    = f.action :submit, :as => :button
-    = f.action :cancel, :as => :link, :label => 'Cancel'
+.span6.offset1
+  .spacer40
+  = twitter_bootstrap_form_for @user, :html => {:class => 'form-horizontal'} do |f|
+    = f.inputs do
+      = f.email_field :email
+      = f.password_field :password
+      = f.password_field :password_confirmation
+      = f.collection_select :role, 'Role', User::ROLES, :to_s, :to_s
+    = f.actions do
+      = f.submit 'Submit account', :class => 'btn btn-danger'
+      = button_tag 'Cancel', :type => 'reset' , :class => 'btn'
 
 
 

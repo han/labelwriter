@@ -1,13 +1,15 @@
-= semantic_form_for @delivery do |f|
-  = f.inputs do
-    = f.input :product, :member_label => :item_code, :input_html => {:disabled => current_user.extern? }
-    = f.input :purchase_order, :input_html => {:disabled => current_user.extern?}
-    = f.input :order_quantity, :input_html => {:disabled => current_user.extern?}
-    = f.input :actual_quantity
-    = f.input :shipped_at,:label => ' Shipped', :as => :date, :order => [:day, :month, :year], :start_year => 2011, :input_html => {:disabled => current_user.extern?}
-    = f.input :delivered_at,:label => ' Delivered', :as => :date, :order => [:day, :month, :year], :start_year => 2011
-  = f.actions do
-    = f.action :submit, :as => :button
-    = f.action :cancel, :as => :link, :label => 'Cancel'
-
+.spacer40
+.span7.offset1
+  = twitter_bootstrap_form_for @delivery, :html => {:class => 'form-horizontal'} do |f|
+    = f.inputs do
+      = f.collection_select :product_id, 'Product', Product.all, :id, :item_code, {:prompt => true}, :disabled => current_user.extern?
+      = f.text_field :purchase_order, :disabled => current_user.extern?
+      = f.number_field :order_quantity, :disabled => current_user.extern?
+      = f.number_field :actual_quantity
+      = f.text_field :tour_number
+      = f.date_select :shipped_at, 'Shipped', {:start_year => 2011, :order => [:day, :month, :year]}, :class => 'span3', :disabled => current_user.extern?
+      = f.date_select :delivered_at, 'Delivered', {:start_year => 2011, :order => [:day, :month, :year]}, :class => 'span3'
+    = f.actions do
+      = f.submit 'Submit delivery', :class => 'btn btn-danger'
+      = button_tag 'Cancel', :type => 'reset' , :class => 'btn'
 

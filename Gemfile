@@ -12,8 +12,10 @@ gem 'haml'
 gem 'barby', :git => "git@github.com:han/barby.git"
 #gem 'barby', :path => "/Users/han/dev/han/barby"
 gem 'devise', '~> 2.0.0'
-gem 'formtastic', '= 2.1.0.beta1'
 gem 'kaminari'
+gem 'less-rails-bootstrap'
+#gem 'twitter_bootstrap_form_for', :path => "/Users/han/dev/han/twitter_bootstrap_form_for"
+gem 'twitter_bootstrap_form_for', :git => "git@github.com:han/twitter_bootstrap_form_for.git"
 
 gem 'thin'
 gem 'heroku'
@@ -21,11 +23,12 @@ gem 'heroku'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
+  gem 'less-rails'
+  #gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
 
   gem 'uglifier', '>= 1.0.3'
-  gem 'compass', git: 'git://github.com/chriseppstein/compass', branch: 'master'
+  #gem 'compass', git: 'git://github.com/chriseppstein/compass', branch: 'master'
 end
 
 gem 'jquery-rails'

@@ -1,8 +1,17 @@
-%ul.menu
-  %li= link_to 'Deliveries', deliveries_path, ({:class => 'selected'} if request.path =~ /#{deliveries_path}/)
-  %li= link_to 'Products', products_path, ({:class => 'selected'} if request.path =~ /#{products_path}/)
+%ul.menu.nav.nav-pills.nav-stacked
+  %li{:class => [request.path =~ /#{deliveries_path}/ ? 'active' : nil]}
+    = link_to deliveries_path do
+      %i{:class => ['icon-envelope', (request.path =~ /#{deliveries_path}/ ? 'icon-white' : nil)]}
+      Deliveries
+  %li{:class => [request.path =~ /#{products_path}/ ? 'active' : nil]}
+    = link_to products_path do
+      %i{:class => ['icon-leaf', (request.path =~ /#{products_path}/ ? 'icon-white' : nil)]}
+      Products
   - if current_user.admin?
-    %li= link_to 'Users', users_path, ({:class => 'selected'} if request.path =~ /#{users_path}/)
+    %li{:class => [request.path =~ /#{users_path}/ ? 'active' : nil]}
+      = link_to users_path do
+        %i{:class => ['icon-user', (request.path =~ /#{users_path}/ ? 'icon-white' : nil)]}
+        Users
 
 
 
