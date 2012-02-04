@@ -9,6 +9,7 @@ class Product < ActiveRecord::Base
   has_many :deliveries
 
   validates :item_code, :fetim_code, :presence => true
+  validates :num_in_buy, :per_pack_un, :max_pallet, :numericality => {:only_integer => true}, :allow_blank => true
 
   BRANDS = Hash.new('').merge({
     159 => 'AirPro',

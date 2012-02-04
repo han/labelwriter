@@ -1,17 +1,11 @@
-@import "compass";
-@import "compass/reset";
-@import "compass/css3/images";
-@import "blueprint";
-
-@include blueprint;
-
 
 body {
   background-color: #fff;
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
-  line-height: 18px; }
+  line-height: 18px;
+ }
 
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
@@ -26,16 +20,14 @@ pre {
 
 
 
-a {
-  &:link,  &:visited {
-    color: #333;
-  }
-}
+/*a {*/
+  /*&:link,  &:visited {*/
+    /*color: #333;*/
+  /*}*/
+/*}*/
 
 table.item_table {
-  @include alternating-rows-and-columns(#fff, #e0ffff, #000, #c0e0ff);
-  @include table-scaffolding;
-  @include outer-table-borders(1px, lightgrey);
+
   border-spacing: 0;
   td, th {
     margin: 0;
@@ -60,56 +52,14 @@ input[type='number'] {
 
 
 .menu {
-  @extend .reset;
-  @extend .clearfix;
-  display: block;
-  position: relative;
   padding-left:0px;
   margin-top: 59px;
+}
 
-  li {
-    @extend .reset;
-    display: block;
-    list-style: none;
-    *vertical-align: top;
-    margin-bottom: 2px;
-    *zoom: 1;
-
-    a {
-      color: #444;
-      display: block;
-      text-decoration: none;
-      background: #c0e0ff;
-      *zoom: 1;
-      &:link, &:visited {
-        padding: 8px 15px;
-      }
-
-      &:hover {
-        @include background-image(linear-gradient(top, #c0e0ff, #b0d0ff));
-        color: #000;
-        text-decoration: underline;
-      }
-
-      &.selected {
-        /*@include background-image(linear-gradient(top, #4289CE,#316CAF));*/
-        @include background-image(linear-gradient(top,#5497ce, #14479a));
-        color: #fff;
-        &:hover {
-          text-decoration: none;
-          cursor: default;
-        }
-      }
-    }
-  }
-
-  &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    right: 0;
-    top: -50px;
-  }
+div.header {
+  margin-left: auto;
+  margin-right: auto;
+  width: 950px;
 }
 
 #top_links {
@@ -132,14 +82,26 @@ input[type='number'] {
   }
 }
 
-.pagination {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  width: 350px;
-  text-align: center;
-}
-
 .footer {
   min-height: 40px;
+}
+
+div.spacer20 {
+  min-height: 20px;
+}
+
+div.spacer40 {
+  min-height: 40px;
+}
+
+#item-table.table-striped {
+  tbody {
+    /*tr:nth-child(odd) td,*/
+    /*tr:nth-child(odd) th {*/
+      /*background-color: #e0ffff;*/
+    /*}*/
+    tr.inconsistent td, tr.inconsistent td:nth-child(1n) {
+      background-color: #f99;
+    }
+  }
 }

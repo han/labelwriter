@@ -47,7 +47,7 @@ class DeliveriesController < ApplicationController
 
     respond_to do |format|
       if @delivery.save
-        format.html { redirect_to @delivery, notice: 'Delivery was successfully created.' }
+        format.html { redirect_to deliveries_path, notice: 'Delivery was successfully created.' }
         format.json { render json: @delivery, status: :created, location: @delivery }
       else
         format.html { render action: "new" }
@@ -63,7 +63,7 @@ class DeliveriesController < ApplicationController
 
     respond_to do |format|
       if @delivery.update_attributes(params[:delivery])
-        format.html { redirect_to @delivery, notice: 'Delivery was successfully updated.' }
+        format.html { redirect_to deliveries_path, notice: 'Delivery was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

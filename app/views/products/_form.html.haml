@@ -1,15 +1,19 @@
-= semantic_form_for @product do |f|
-  = f.inputs do
-    = f.input :item_code
-    = f.input :fetim_code
-    = f.input :omlabel
-    = f.input :item_grp_code
-    = f.input :size
-    = f.input :num_in_buy
-    = f.input :per_pack_un
-    = f.input :max_pallet
-    = f.input :code_bars, :label => 'EAN number'
-  = f.actions do
-    = f.action :submit, :as => :button
-    = f.action :cancel, :as => :link, :label => 'Cancel'
+.span7.offset1
+  .spacer40
+  = twitter_bootstrap_form_for @product, :html => {:class => 'form-horizontal'} do |f|
+    = f.inputs do
+      = f.text_field :item_code
+      = f.text_field :fetim_code
+      = f.text_field :omlabel
+      -#= f.text_field :item_grp_code, 'Brand'
+      = f.collection_select :item_grp_code, 'Brand', Product::BRANDS.values, :to_s, :to_s, :prompt => true
+      = f.text_field :size
+      = f.number_field :num_in_buy, '# in pack unit'
+      = f.number_field :per_pack_un, '# in box'
+      = f.number_field :max_pallet, '# on pallet'
+      = f.text_field :code_bars, 'EAN barcode'
+    = f.actions do
+      = f.submit 'Submit product', :class => 'btn btn-danger'
+      = button_tag 'Cancel', :type => 'reset' , :class => 'btn'
+
 

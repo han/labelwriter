@@ -2,38 +2,50 @@
 
 %h1 Product details
 
-%p
-  %b Item code:
-  = @product.item_code
-%p
-  %b Fetim code:
-  = @product.fetim_code
-%p
-  %b Label:
-  = @product.omlabel
-%p
-  %b Brand
-  = @product.item_grp_code
-%p
-  %b size:
-  = @product.size
-%p
-  %b Per buy unit:
-  = @product.num_in_buy
-%p
-  %b Per pack unit:
-  = @product.per_pack_un
-%p
-  %b Max per pallet:
-  = @product.max_pallet
-%p
-  %b EAN code:
-  = @product.code_bars
-%p
-  %b Status:
-  = @product.status
+.span7.offset1
+  .spacer40
+  %table.table
+    %thead
+    %tbody
+      %tr
+        %td
+          %strong Item code
+        %td= @product.item_code
+      %tr
+        %td
+          %strong Fetim code
+        %td= @product.fetim_code
+      %tr
+        %td
+          %strong Label
+        %td= @product.omlabel
+      %tr
+        %td
+          %strong Brand
+        %td= @product.item_grp_code
+      %tr
+        %td
+          %strong Items per buy unit
+        %td= @product.num_in_buy
+      %tr
+        %td
+          %strong Buy units per box
+        %td= @product.per_pack_un
+      %tr
+        %td
+          %strong Boxes per pallet
+        %td= @product.max_pallet
+      %tr
+        %td
+          %strong EAN barcode
+        %td= @product.code_bars
+      %tr
+        %td
+          %strong Status
+        %td= @product.status
 
--unless current_user.extern?
-  = link_to 'Edit', edit_product_path(@product)
-  \|
-= link_to 'Back', products_path
+  .spacer20
+  -unless current_user.extern?
+    %strong= link_to 'Edit', edit_product_path(@product)
+    \|
+  %strong= link_to 'Back', products_path
