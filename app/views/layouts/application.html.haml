@@ -15,10 +15,18 @@
         .span12
           .header
             = render 'layouts/layout'
+      .spacer20
       .row-fluid
-        - if flash[:error] || flash[:notice]
-          .flash
-            = flash[:error] || flash[:notice]
+        .span12
+          .span3.offset6
+            - if flash[:error] || flash[:alert]
+              .alert.alert-error
+                %a.close{:"data-dismiss" => "alert", :href => "#"} x
+                = flash[:error] || flash[:alert]
+            - elsif flash[:notice]
+              .alert.alert-info
+                %a.close{:"data-dismiss" => "alert", :href => "#"} x
+                =flash[:notice]
       .row-fluid
         .span2
           - if user_signed_in?

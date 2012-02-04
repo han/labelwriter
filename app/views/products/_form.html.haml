@@ -13,7 +13,7 @@
       = f.number_field :max_pallet, '# on pallet'
       = f.text_field :code_bars, 'EAN barcode'
     = f.actions do
-      = f.submit 'Submit product', :class => 'btn btn-danger'
+      = f.submit 'Submit product', :disable_with => 'Please wait...', :class => 'btn btn-danger'
       = button_tag 'Cancel', :type => 'reset' , :class => 'btn'
 
 

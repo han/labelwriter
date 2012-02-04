@@ -1,5 +1,16 @@
 %h1 Deliveries
 .spacer20
+  - if @changed
+    .alert.alert-info.alert-block
+      %a.close{:"data-dismiss" => "alert", :href => "#"} x
+      %h4.alert-heading Import successful
+      = @changed.count
+      Records were changed
+      %p
+      - if @changed.count > 0
+        = link_to "Generate labels for changed records", labels_deliveries_path(:format => 'pdf', :range => @changed.join(',')), :target => '_blank', :class => 'btn btn-danger'
+  .spacer20
+
 %table.table.table-striped.table-borderedx.table-condensed#item-table
   %thead
     %tr
@@ -51,7 +62,7 @@
         - unless current_user.extern?
           = form_tag inbound_deliveries_path, :multipart => true, :class => 'form-horizontal' do
             = file_field_tag 'inbound_csv'
-            = submit_tag "Upload Inbound", :class => 'btn btn-danger'
+            = submit_tag "Upload Inbound", :disable_with => 'Please wait...', :class => 'btn btn-danger'
         = form_tag outbound_deliveries_path, :multipart => true, :class => 'form-horizontal' do
           = file_field_tag 'outbound_csv'
-          = submit_tag "Upload Outbound", :class => 'btn btn-danger'
+          = submit_tag "Upload Outbound", :disable_with => 'Please wait...', :class => 'btn btn-danger'

@@ -88,9 +88,10 @@ class DeliveriesController < ApplicationController
     @changed = Delivery.import_inbound_csv params[:inbound_csv], current_user
     if @changed
       # redirect_to deliveries_path, :notice => 'Import geslaagd'
-      render 'delivery_import_report'
+      @deliveries = Delivery.order('id DESC').page(params[:page]).per(25)
+      render :action => :index
     else
-      redirect_to deliveries_path, :error => 'Import mislukt'
+      redirect_to deliveries_path, :error => 'Import failed'
     end
 
   end
@@ -100,7 +101,7 @@ class DeliveriesController < ApplicationController
     if @changed
       render 'delivery_import_report'
     else
-      redirect_to deliveries_path, :error => 'Import mislukt'
+      redirect_to deliveries_path, :error => 'Import failed'
     end
 
   end

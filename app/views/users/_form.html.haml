@@ -7,7 +7,7 @@
       = f.password_field :password_confirmation
       = f.collection_select :role, 'Role', User::ROLES, :to_s, :to_s
     = f.actions do
-      = f.submit 'Submit account', :class => 'btn btn-danger'
+      = f.submit 'Submit account', :disable_with => 'Please wait...', :class => 'btn btn-danger'
       = button_tag 'Cancel', :type => 'reset' , :class => 'btn'
 
 

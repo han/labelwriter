@@ -10,6 +10,6 @@
       = f.date_select :shipped_at, 'Shipped', {:start_year => 2011, :order => [:day, :month, :year]}, :class => 'span3', :disabled => current_user.extern?
       = f.date_select :delivered_at, 'Delivered', {:start_year => 2011, :order => [:day, :month, :year]}, :class => 'span3'
     = f.actions do
-      = f.submit 'Submit delivery', :class => 'btn btn-danger'
+      = f.submit 'Submit delivery', :disable_with => 'Please wait...', :class => 'btn btn-danger'
       = button_tag 'Cancel', :type => 'reset' , :class => 'btn'
 
