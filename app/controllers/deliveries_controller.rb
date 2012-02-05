@@ -1,7 +1,7 @@
 class DeliveriesController < ApplicationController
 
   before_filter :authenticate_user!
-  before_filter :authorize_pls!, :only => [:destroy, :inbound]
+  before_filter :authorize_pls!, :only => [:destroy, :inbound, :new, :create]
   # GET /deliveries
   # GET /deliveries.json
   def index
@@ -60,6 +60,10 @@ class DeliveriesController < ApplicationController
   # PUT /deliveries/1.json
   def update
     @delivery = Delivery.find(params[:id])
+
+    if current_user.extern?
+      params[:delivery].delete_if{|k,v| %w{product_id purchase_order order_quantity shipped_at}.include?(k)}
+    end
 
     respond_to do |format|
       if @delivery.update_attributes(params[:delivery])
