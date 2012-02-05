@@ -8,6 +8,9 @@ class Product < ActiveRecord::Base
 
   has_many :deliveries
 
+  attr_accessible :item_code, :item_grp_code, :code_bars, :num_in_buy, :per_pack_un, :size,
+    :omlabel, :max_pallet, :fetim_code
+
   validates :item_code, :fetim_code, :presence => true
   validates :num_in_buy, :per_pack_un, :max_pallet, :numericality => {:only_integer => true}, :allow_blank => true
 

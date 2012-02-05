@@ -4,6 +4,8 @@ require 'csv_tools'
 class Delivery < ActiveRecord::Base
   belongs_to :product
 
+  attr_accessible :product_id, :purchase_order, :order_quantity, :actual_quantity, :shipped_at, :delivered_at, :tour_number
+
   validates :product_id, :purchase_order, :order_quantity, :presence => true
 
   def self.import_inbound_csv(file, user)
