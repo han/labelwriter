@@ -20,3 +20,6 @@ $ ->
   $("#delete_cancel").on 'click', ->
     $("#deletion_modal").modal("hide")
 
+  $("#deletion_modal").on 'hidden', ->
+    $("#deletion_modal").removeData('url')
+
