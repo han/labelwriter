@@ -1,0 +1,19 @@
+.modal.hide#deletion_modal
+  .modal-header
+    %a.close{:'data-dismiss' => "modal"} x
+    %h3
+      Delete #{item}?
+  .modal-body
+    %p
+      Deleting #{item}
+      %strong
+        %span#deletion_modal_desc
+    %p
+      Are you sure?
+  .modal-footer
+    %a.btn.btn-danger#delete_ok
+      Delete #{item}
+    %a.btn#delete_cancel{:href => '#'}
+      Cancel
+
+

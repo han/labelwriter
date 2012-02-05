@@ -30,9 +30,8 @@
         - unless current_user.extern?
           %td
             =link_to 'Edit', edit_product_path(product)
-          %td
-            - unless product.status == 'deleted'
-              = link_to 'Del', product, :confirm => 'Are you sure?', :method => :delete
+          - unless product.status == 'deleted'
+            %td.delete= link_to 'Del', '#', :"data-url" => product_path(product), :"data-desc" => "#{product.item_code} - #{product.omlabel}"
 
 = paginate @products
 
@@ -57,3 +56,5 @@
               .controls
                 = file_field_tag 'fetimcodes_csv', :label => 'Fetim CSV'
             = submit_tag "Upload Products", :disable_with => 'Please wait...', :class => 'btn btn-danger'
+
+= render :partial => 'shared/deletion_modal', :locals => {:item => 'product'}

@@ -4,18 +4,19 @@
     .alert.alert-info.alert-block
       %a.close{:"data-dismiss" => "alert", :href => "#"} x
       %h4.alert-heading Import successful
+      .spacer20
       = @changed.count
       Records were changed
-      %p
+      .spacer20
       - if @changed.count > 0
-        = link_to "Generate labels for changed records", labels_deliveries_path(:format => 'pdf', :range => @changed.join(',')), :target => '_blank', :class => 'btn btn-danger'
+        = link_to "Generate labels for changed records", labels_deliveries_path(:format => 'pdf', :range => @changed.join(',')), :target => '_blank', :class => 'btn btn-info'
   .spacer20
 
 %table.table.table-striped.table-borderedx.table-condensed#item-table
   %thead
     %tr
-      %th Product
       %th PO
+      %th Product
       %th Order#
       %th Actual#
       %th Box#
@@ -35,8 +36,9 @@
         %td
           - unless delivery.quantity_consistent?
             %span.label.label-important Error
+          = delivery.purchase_order
+        %td
           = link_to delivery.product.item_code, product_path(delivery.product_id)
-        %td= delivery.purchase_order
         %td= delivery.order_quantity
         %td= delivery.actual_quantity
         %td= delivery.num_boxes
@@ -46,7 +48,7 @@
         %td= link_to 'Label', labels_deliveries_path(:format => 'pdf', :range => delivery.id), :target => '_blank'
         %td= link_to 'Edit', edit_delivery_path(delivery)
         - unless current_user.extern?
-          %td= link_to 'Del', delivery, :confirm => 'Are you sure?', :method => :delete
+          %td.delete= link_to 'Del', '#', :"data-url" => delivery_path(delivery), :"data-desc" => "#{delivery.purchase_order} - #{delivery.product.item_code}"
 
 = paginate @deliveries
 
@@ -66,3 +68,5 @@
         = form_tag outbound_deliveries_path, :multipart => true, :class => 'form-horizontal' do
           = file_field_tag 'outbound_csv'
           = submit_tag "Upload Outbound", :disable_with => 'Please wait...', :class => 'btn btn-danger'
+
+= render :partial => 'shared/deletion_modal', :locals => {:item => 'delivery'}

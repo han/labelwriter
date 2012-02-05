@@ -26,9 +26,8 @@
         %td= user.sign_in_count
         %td= user.current_sign_in_ip
         %td= link_to 'Edit', edit_user_path(user)
-        %td
-          - unless user.status == 'deleted'
-            = link_to 'Delete', user, :confirm => 'Are you sure?', :method => :delete
+        - unless user.status == 'deleted'
+          %td.delete= link_to 'Delete', '#', :"data-url" => user_path(user), :"data-desc" => user.email
 
 = paginate @users
 
@@ -36,3 +35,4 @@
 
 = link_to 'New User', new_user_path, :class => 'btn btn-danger'
 
+= render :partial => 'shared/deletion_modal', :locals => {:item => 'user'}
