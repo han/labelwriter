@@ -5,3 +5,9 @@ en:
   devise:
     sessions:
       signed_in: ""
+  views:
+    pagination:
+      first: "&laquo;"
+      last: "&raquo;"
+      previous: "&lsaquo;"
+      next: "&rsaquo;"
