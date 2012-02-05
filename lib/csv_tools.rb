@@ -7,5 +7,7 @@ module CsvTools
     s += file.tempfile.read
     s.force_encoding('iso-8859-1').encode!('utf-8')
     [s, $1]
+  rescue EOFError
+    [nil, nil]
   end
 end

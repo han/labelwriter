@@ -32,6 +32,7 @@ class Product < ActiveRecord::Base
   def self.import_csv(product_file, fetim_file)
     products_text, products_sep = CsvTools.prep_csv(product_file, '#')
     fetim_text, fetim_sep = CsvTools.prep_csv(fetim_file, '#')
+    return nil unless products_text && fetim_text
 
     fetim_codes = {}
     CSV.parse(fetim_text, :col_sep => fetim_sep, :headers => true, :skip_blanks => true).each do |row|

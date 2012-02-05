@@ -1,4 +1,6 @@
 require 'csv'
+require 'csv_tools'
+
 class Delivery < ActiveRecord::Base
   belongs_to :product
 
@@ -6,11 +8,12 @@ class Delivery < ActiveRecord::Base
 
   def self.import_inbound_csv(file, user)
     return false unless file.present?
-    csv = CSV.parse(file.read, :col_sep => ';', :headers => true, :skip_blanks => true)
+    inbound_text, sep = CsvTools.prep_csv(file, 'Mutatie')
+    return nil unless inbound_text
     errors = {}
     changed_deliveries = {}
     Delivery.transaction do
-      csv.each do |row|
+      CSV.parse(inbound_text, :col_sep => sep, :headers => true, :skip_blanks => true).each do |row|
 
         next if row.header_row?
         ship_date = Date.strptime(row['ShipDate'], "%d-%m-%y")
@@ -37,18 +40,12 @@ class Delivery < ActiveRecord::Base
 
   def self.import_outbound_csv(file, user)
     return false unless file.present?
-    csv_text = file.read
-    Rails.logger.info csv_text
-    ar = csv_text.split("\r\n")
-    Rails.logger.info ar.inspect
-    ar = ar[1..-1]
-    csv_text = ar.join("\n")
-    Rails.logger.info "csv text: #{csv_text}"
-    csv = CSV.parse(csv_text, :col_sep => ';', :headers => true)
+    outbound_text, sep = CsvTools.prep_csv(file, 'Delivery Date')
+    return nil unless outbound_text
     errors = {}
     changed_deliveries = {}
     Delivery.transaction do
-      csv.each do |row|
+      CSV.parse(outbound_text, :col_sep => sep, :headers => true, :skip_blanks => true).each do |row|
         next if row.header_row?
         delivery_date = Date.strptime(row['Delivery Date'], "%d-%m-%Y")
         tour_number = row['Tour Number']

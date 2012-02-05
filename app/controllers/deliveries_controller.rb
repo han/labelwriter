@@ -91,7 +91,7 @@ class DeliveriesController < ApplicationController
       @deliveries = Delivery.order('id DESC').page(params[:page]).per(25)
       render :action => :index
     else
-      redirect_to deliveries_path, :error => 'Import failed'
+      redirect_to deliveries_path, :alert => 'Import failed'
     end
 
   end
@@ -99,9 +99,10 @@ class DeliveriesController < ApplicationController
   def outbound
     @changed = Delivery.import_outbound_csv params[:outbound_csv], current_user
     if @changed
-      render 'delivery_import_report'
+      @deliveries = Delivery.order('id DESC').page(params[:page]).per(25)
+      render :action => :index
     else
-      redirect_to deliveries_path, :error => 'Import failed'
+      redirect_to deliveries_path, :alert => 'Import failed'
     end
 
   end
