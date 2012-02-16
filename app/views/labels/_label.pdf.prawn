@@ -6,8 +6,8 @@ num_labels = delivery.pallets_needed
     pdf.text "Fetim Article #:"
     pdf.text "Fetim Article Name:"
     pdf.text "Size:"
-    pdf.text "Boxes"
-    pdf.text "Items"
+    pdf.text "Boxes:"
+    pdf.text "Items:"
   end
   pdf.bounding_box([30, pdf.bounds.top - 460], :width => 300) do
     pdf.text delivery.product.item_grp_code
@@ -20,7 +20,7 @@ num_labels = delivery.pallets_needed
     pdf.text delivery.num_boxes.to_s, :align => :right
     pdf.text delivery.quantity.to_s, :align => :right
   end
-  if delivery.product.code_bars.present?
+  if delivery.product.valid_barcode?
     pdf.bounding_box([30, pdf.bounds.top - 290], :width => 300) do
       pdf.text "Fetim EAN-code:"
     end
