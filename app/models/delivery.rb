@@ -75,24 +75,26 @@ class Delivery < ActiveRecord::Base
   end
 
   def quantity
-    if self.actual_quantity.present? && self.actual_quantity > 0
-      self.actual_quantity
+    if actual_quantity.present? && actual_quantity > 0
+      actual_quantity
     else
-      self.order_quantity
+      order_quantity
     end
   end
 
   def num_boxes
-    (1.0 * quantity / (self.product.num_in_buy * self.product.per_pack_un)).ceil
+    return 0 unless product.num_in_buy.present? && product.per_pack_un.present?
+    (1.0 * quantity / (product.num_in_buy * product.per_pack_un)).ceil
   end
 
-  def quantity_consistent?(q = self.quantity)
-    q % (self.product.num_in_buy * self.product.per_pack_un) == 0
+  def quantity_consistent?(q = quantity)
+    return false unless product.num_in_buy.present? && product.per_pack_un.present?
+    q % (self.product.num_in_buy * product.per_pack_un) == 0
   end
 
   def pallets_needed
-    return 1 unless self.product.max_pallet.present?
-    (1.0 * num_boxes / self.product.max_pallet).ceil
+    return 1 unless product.max_pallet.present?
+    (1.0 * num_boxes / product.max_pallet).ceil
   end
 
   def self.convert_to_i(txt)
