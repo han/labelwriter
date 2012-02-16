@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120202054437) do
+ActiveRecord::Schema.define(:version => 20120216024006) do
 
   create_table "deliveries", :force => true do |t|
     t.integer  "product_id"
@@ -46,6 +46,9 @@ ActiveRecord::Schema.define(:version => 20120202054437) do
     t.string   "status",        :default => "active", :null => false
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
+    t.integer  "length"
+    t.integer  "width"
+    t.integer  "height"
   end
 
   add_index "products", ["item_code"], :name => "index_products_on_item_code", :unique => true
