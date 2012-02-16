@@ -50,7 +50,7 @@
         - unless current_user.extern?
           %td.delete= link_to 'Del', '#', :"data-url" => delivery_path(delivery), :"data-desc" => "#{delivery.purchase_order} - #{delivery.product.item_code}"
 
-= paginate @deliveries
+= paginate @deliveries, :params => {:controller => :deliveries, :action => :index}
 
 - unless current_user.extern?
   %strong
