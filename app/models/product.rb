@@ -62,9 +62,12 @@ class Product < ActiveRecord::Base
   PALLET_HEIGHT = 800 - 160
 
   def determine_max_pallet
-    return 1 unless length.present? && width.present? && height.present?
-    return approx_boxes_in_layer * pallet_layers if PALLET_LENGTH * PALLET_WIDTH / (length * width) > 25
-    self.max_pallet = boxes_in_layer(PALLET_LENGTH, PALLET_WIDTH) * pallet_layers
+    return unless length.present? && width.present? && height.present?
+    self.max_pallet = if PALLET_LENGTH * PALLET_WIDTH / (length * width) > 25
+      approx_boxes_in_layer * pallet_layers
+    else
+      boxes_in_layer(PALLET_LENGTH, PALLET_WIDTH) * pallet_layers
+    end
   end
 
   def pallet_layers
