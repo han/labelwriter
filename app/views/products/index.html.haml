@@ -30,8 +30,9 @@
         - unless current_user.extern?
           %td
             =link_to 'Edit', edit_product_path(product)
-          - unless product.status == 'deleted'
-            %td.delete= link_to 'Del', '#', :"data-url" => product_path(product), :"data-desc" => "#{product.item_code} - #{product.omlabel}"
+          %td.delete
+            - unless product.status == 'deleted'
+              = link_to 'Del', '#', :"data-url" => product_path(product), :"data-desc" => "#{product.item_code} - #{product.omlabel}"
 
 = paginate @products
 
@@ -51,10 +52,6 @@
               = label_tag 'Products CSV', nil, :class => 'control-label'
               .controls
                 = file_field_tag 'products_csv', :label => 'Products CSV'
-            .control-group
-              = label_tag 'FETIM codes CSV', nil, :class => 'control-label'
-              .controls
-                = file_field_tag 'fetimcodes_csv', :label => 'Fetim CSV'
             = submit_tag "Upload Products", :disable_with => 'Please wait...', :class => 'btn btn-danger'
 
 = render :partial => 'shared/deletion_modal', :locals => {:item => 'product'}
