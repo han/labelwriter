@@ -99,4 +99,21 @@ class ProductsController < ApplicationController
       redirect_to products_path, :alert => 'Import failed'
     end
   end
+
+  def export
+    products = Product.all
+    respond_to do |format|
+      format.csv { export_csv(products) }
+    end
+  end
+
+  private
+
+  BOM = "\uFEFF" #Byte Order Mark
+
+  def export_csv(products)
+    content = (BOM + Product.to_csv(products)).encode('UTF-16le')
+    send_data content, :filename => "products_#{I18n.l(Time.now, :format => :short)}.csv"
+  end
+
 end

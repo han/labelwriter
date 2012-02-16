@@ -106,4 +106,13 @@ class Product < ActiveRecord::Base
     save
   end
 
+  def self.to_csv(products)
+    csv_str = CSV.generate(:col_sep => "\t") do |csv|
+      csv << COLUMNS.keys
+      products.each do |p|
+        csv << COLUMNS.values.map {|attr| p.send(attr)}
+      end
+    end
+  end
+
 end

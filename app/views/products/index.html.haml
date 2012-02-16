@@ -53,5 +53,11 @@
               .controls
                 = file_field_tag 'products_csv', :label => 'Products CSV'
             = submit_tag "Upload Products", :disable_with => 'Please wait...', :class => 'btn btn-danger'
+  .row-fluid
+    .span6.offset2
+      .well
+        %h3 Export to CSV
+        .spacer20
+        = link_to "Export", export_products_path(:format => :csv), :class => 'btn btn-danger'
 
 = render :partial => 'shared/deletion_modal', :locals => {:item => 'product'}

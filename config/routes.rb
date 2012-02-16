@@ -25,6 +25,7 @@ Labelwriter::Application.routes.draw do
     collection do
       get 'page/:page', :action => :index
       post 'import' => 'products#import'
+      get 'export' => 'products#export'
     end
   end
 
