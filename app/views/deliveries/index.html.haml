@@ -17,12 +17,12 @@
     %tr
       %th PO
       %th Product
-      %th Order#
-      %th Actual#
-      %th Box#
-      %th Pallet#
-      %th Shipped
-      %th Delivered
+      %th Ordered
+      %th Actual
+      %th Boxes
+      %th Pallets
+      %th Ship date
+      %th Delivery date
       %th
         %i.icon-print
       %th
@@ -45,7 +45,7 @@
         %td= delivery.pallets_needed
         %td= delivery.shipped_at
         %td= delivery.delivered_at
-        %td= link_to 'Label', labels_deliveries_path(:format => 'pdf', :range => delivery.id), :target => '_blank'
+        %td= link_to pluralize(delivery.pallets_needed, 'Label') , labels_deliveries_path(:format => 'pdf', :range => delivery.id), :target => '_blank'
         %td= link_to 'Edit', edit_delivery_path(delivery)
         - unless current_user.extern?
           %td.delete= link_to 'Del', '#', :"data-url" => delivery_path(delivery), :"data-desc" => "#{delivery.purchase_order} - #{delivery.product.item_code}"

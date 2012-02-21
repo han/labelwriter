@@ -33,7 +33,7 @@ class Delivery < ActiveRecord::Base
           delivery = create :product_id => product.id, :purchase_order => po, :order_quantity => q, :shipped_at => ship_date
           changed_deliveries[delivery.id] = delivery
         end
-        (errors[delivery.id] ||= []) << "Order Quantity #{q} not consistent with num_in_buy (#{delivery.product.num_in_buy}) and per_pack_un (#{delivery.product.per_pack_un})" unless delivery.quantity_consistent?
+        (errors[delivery.id] ||= []) << "Order Quantity #{q} not consistent with per_pack_un (#{delivery.product.per_pack_un})" unless delivery.quantity_consistent?
       end
       DeliveryAudit.create :deliveries => changed_deliveries, :errors => errors, :user => user.id
     end
@@ -63,7 +63,7 @@ class Delivery < ActiveRecord::Base
         next unless delivery
 
         (errors[delivery.id] ||= []) << "Attempt to update order quantity from #{delivery.order_quantity} to #{order_qty}" if order_qty != delivery.order_quantity
-        (errors[delivery.id] ||= []) << "Actual Quantity #{actual_qty} not consistent with num_in_buy (#{delivery.product.num_in_buy}) and per_pack_un (#{delivery.product.per_pack_un})" unless delivery.quantity_consistent?(actual_qty)
+        (errors[delivery.id] ||= []) << "Actual Quantity #{actual_qty} not consistent with per_pack_un (#{delivery.product.per_pack_un})" unless delivery.quantity_consistent?(actual_qty)
 
         delivery.attributes = {:tour_number => tour_number, :actual_quantity => actual_qty, :delivered_at => delivery_date}
         changed_deliveries[delivery.id] = delivery if delivery.changed?
@@ -83,13 +83,13 @@ class Delivery < ActiveRecord::Base
   end
 
   def num_boxes
-    return 0 unless product.num_in_buy.present? && product.per_pack_un.present?
-    (1.0 * quantity / (product.num_in_buy * product.per_pack_un)).ceil
+    return 0 unless  product.per_pack_un.present?
+    (1.0 * quantity / product.per_pack_un).ceil
   end
 
   def quantity_consistent?(q = quantity)
-    return false unless product.num_in_buy.present? && product.per_pack_un.present?
-    q % (self.product.num_in_buy * product.per_pack_un) == 0
+    return false unless product.per_pack_un.present?
+    q % self.product.per_pack_un  == 0
   end
 
   def pallets_needed
@@ -100,6 +100,14 @@ class Delivery < ActiveRecord::Base
   def self.convert_to_i(txt)
     return unless txt.present?
     txt.gsub('.','').split(',')[0].to_i
+  end
+
+  def boxes_for_pallet(pallet_no)
+    [num_boxes - (pallet_no - 1) * product.max_pallet, product.max_pallet].min
+  end
+
+  def quantity_for_pallet(pallet_no)
+    product.per_pack_un * boxes_for_pallet(pallet_no)
   end
 end
 

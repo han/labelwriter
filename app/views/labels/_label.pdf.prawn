@@ -17,8 +17,8 @@ num_labels = delivery.pallets_needed
     pdf.text delivery.product.fetim_code, :align => :right
     pdf.text delivery.product.omlabel || ' ', :align => :right
     pdf.text delivery.product.size || ' ', :align => :right
-    pdf.text delivery.num_boxes.to_s, :align => :right
-    pdf.text delivery.quantity.to_s, :align => :right
+    pdf.text delivery.boxes_for_pallet(i).to_s, :align => :right
+    pdf.text delivery.quantity_for_pallet(i).to_s, :align => :right
   end
   if delivery.product.valid_barcode?
     pdf.bounding_box([30, pdf.bounds.top - 290], :width => 300) do

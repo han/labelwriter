@@ -8,8 +8,8 @@
       -#= f.text_field :item_grp_code, 'Brand'
       = f.collection_select :item_grp_code, 'Brand', Product::BRANDS.values, :to_s, :to_s, :prompt => true
       = f.text_field :size
-      = f.number_field :num_in_buy, '# in pack unit'
-      = f.number_field :per_pack_un, '# in box'
+      = f.number_field :num_in_buy, '# items per buy unit'
+      = f.number_field :per_pack_un, '# per pack unit'
       = f.number_field :length, 'box length (mm)'
       = f.number_field :width, 'box width (mm)'
       = f.number_field :height, 'box height (mm)'
