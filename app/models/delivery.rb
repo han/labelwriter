@@ -107,7 +107,8 @@ class Delivery < ActiveRecord::Base
   end
 
   def quantity_for_pallet(pallet_no)
-    product.per_pack_un * boxes_for_pallet(pallet_no)
+    per_vpe = product.num_in_buy.present? && product.num_in_buy > 0 ? product.num_in_buy : 1
+    product.per_pack_un * boxes_for_pallet(pallet_no) / per_vpe
   end
 end
 
