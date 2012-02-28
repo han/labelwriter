@@ -98,7 +98,7 @@ class Product < ActiveRecord::Base
   end
 
   def valid_barcode?
-    code_bars.present? && code_bars =~ /^[0-9]{13}$/
+    code_bars.present? && code_bars =~ /^[0-9]{13}$/ && !item_code =~ /^FESC/
   end
 
   def delete!
