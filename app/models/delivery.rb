@@ -4,7 +4,7 @@ require 'csv_tools'
 class Delivery < ActiveRecord::Base
   belongs_to :product
 
-  attr_accessible :product_id, :purchase_order, :order_quantity, :actual_quantity, :shipped_at, :delivered_at, :tour_number
+  attr_accessible :product_id, :purchase_order, :fetim_order, :order_quantity, :actual_quantity, :shipped_at, :delivered_at, :tour_number
 
   validates :product_id, :purchase_order, :order_quantity, :presence => true
 
@@ -20,6 +20,7 @@ class Delivery < ActiveRecord::Base
         next if row.header_row?
         ship_date = Date.strptime(row['ShipDate'], "%d-%m-%y")
         po = row['DocNum']
+        fo = row['NumAtCard']
         q = convert_to_i(row['OpenQty'])
         product = Product.find_by_item_code row['ItemCode']
 
@@ -27,10 +28,11 @@ class Delivery < ActiveRecord::Base
 
         delivery = Delivery.find_by_purchase_order_and_shipped_at_and_product_id(po, ship_date, product.id)
         if delivery
-          changed_deliveries[delivery.id] = delivery if delivery.order_quantity != q
-          delivery.update_attributes :order_quantity => q
+          changed_deliveries[delivery.id] = delivery if delivery.order_quantity != q || (delivery.fetim_order.nil? && fo.present?)
+          delivery.update_attributes :order_quantity => q, :fetim_order => fo
         else
-          delivery = create :product_id => product.id, :purchase_order => po, :order_quantity => q, :shipped_at => ship_date
+          delivery = create :product_id => product.id, :purchase_order => po, :fetim_order => fo,
+            :order_quantity => q, :shipped_at => ship_date
           changed_deliveries[delivery.id] = delivery
         end
         (errors[delivery.id] ||= []) << "Order Quantity #{q} not consistent with per_pack_un (#{delivery.product.per_pack_un})" unless delivery.quantity_consistent?
@@ -103,7 +105,8 @@ class Delivery < ActiveRecord::Base
   end
 
   def boxes_for_pallet(pallet_no)
-    [num_boxes - (pallet_no - 1) * product.max_pallet, product.max_pallet].min
+    # [num_boxes - (pallet_no - 1) * product.max_pallet, product.max_pallet].min
+    num_boxes / pallets_needed + (num_boxes % pallets_needed >= pallet_no ? 1 : 0)
   end
 
   def quantity_for_pallet(pallet_no)
