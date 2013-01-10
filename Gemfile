@@ -9,7 +9,7 @@ gem 'pg'
 gem 'prawn'
 gem 'prawn_rails'
 gem 'haml'
-gem 'barby', :git => "git@github.com:han/barby.git"
+gem 'barby', :git => "git://github.com/han/barby.git"
 #gem 'barby', :path => "/Users/han/dev/han/barby"
 gem 'devise', '~> 2.0.0'
 gem 'kaminari'

@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:han/barby.git
+  remote: git://github.com/han/barby.git
   revision: 8c469f25f0e11e6d23e47eb0e8c682b3bb39c80f
   specs:
     barby (0.5.0)
