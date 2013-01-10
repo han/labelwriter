@@ -20,6 +20,9 @@ gem 'twitter_bootstrap_form_for', :git => "git://github.com/han/twitter_bootstra
 gem 'thin'
 gem 'heroku'
 
+gem 'therubyracer'
+gem 'execjs'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
