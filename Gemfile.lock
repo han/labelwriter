@@ -5,7 +5,7 @@ GIT
     barby (0.5.0)
 
 GIT
-  remote: git@github.com:han/twitter_bootstrap_form_for.git
+  remote: git://github.com/han/twitter_bootstrap_form_for.git
   revision: 9f47480a809e1e61c4d2fad8e5cbe879cb454569
   specs:
     twitter_bootstrap_form_for (1.0.5)

@@ -15,7 +15,7 @@ gem 'devise', '~> 2.0.0'
 gem 'kaminari'
 gem 'less-rails-bootstrap'
 #gem 'twitter_bootstrap_form_for', :path => "/Users/han/dev/han/twitter_bootstrap_form_for"
-gem 'twitter_bootstrap_form_for', :git => "git@github.com:han/twitter_bootstrap_form_for.git"
+gem 'twitter_bootstrap_form_for', :git => "git://github.com/han/twitter_bootstrap_form_for.git"
 
 gem 'thin'
 gem 'heroku'
